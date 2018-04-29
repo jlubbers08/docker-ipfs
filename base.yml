@@ -1,20 +1,7 @@
 version: '2'
 services:
-  consul:
-    image: qnib/alpn-consul
-    hostname: consul
-    container_name: consul
-    networks:
-     - ipfs
-    ports:
-     - "8500:8500"
-    environment:
-     - DC_NAME=ipfs
-     - CONSUL_BOOTSTRAP=true
-    privileged: true
-
   ipfs:
-    image: qnib/ipfs
+    image: jlubbers08/ipfs
     networks:
      - ipfs
     dns: 
@@ -25,6 +12,7 @@ services:
     volumes:
      - /data/
     ports:
-     - 5001
+     - 50001
      - 8080
+     - 40001
     privileged: true
