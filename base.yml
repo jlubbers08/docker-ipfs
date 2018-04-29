@@ -8,7 +8,6 @@ services:
      - consul
     environment:
      - DC_NAME=ipfs
-     - CONSUL_CLUSTER_IPS=consul
     volumes:
      - /data/
     ports:
