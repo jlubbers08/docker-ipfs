@@ -1,22 +1,15 @@
 version: '2'
 services:
-  consul:
-    extends:
-        file: base.yml
-        service: consul
-
-  ipfs0:
+  ipfs:
     extends:
         file: base.yml
         service: ipfs
-    hostname: ipfs0
-    container_name: ipfs0
-    links:
-     - consul:consul
+    hostname: ipfs
+    container_name: ipfs
     ports:
      - "8080:8080"
-     - "5001:5001"
-     - "4001:4001"
+     - "50003:5001"
+     - "40001:4001"
     environment:
      - IPFS_BIND_IP=0.0.0.0
      - IPFS_BOOTSTRAP_RM_ALL=true
@@ -25,25 +18,3 @@ services:
     volumes:
      - ./data/:/input/
 
-  ipfs1:
-    extends:
-        file: base.yml
-        service: ipfs
-    hostname: ipfs1
-    container_name: ipfs1
-    links:
-     - consul:consul
-    ports:
-     - 18080:18080
-     - 15001:15001
-     - 4001
-    environment:
-     - GATEWAY_PORT=18080
-     - API_PORT=15001
-     - IPFS_BIND_IP=0.0.0.0
-     - IPFS_BOOTSTRAP_RM_ALL=true
-     - IPFS_LOGGING=""
-
-networks:
-  ipfs:
-    driver: bridge
